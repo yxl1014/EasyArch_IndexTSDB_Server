@@ -20,11 +20,11 @@ bool UserTable::insertUser(User *user) {
     int home = this->hash(user->getUsername(), user->getPassword());
     User *temp = users[home];
     bool isok;
-    if (temp == NULL) {
+    if (temp == nullptr) {
         temp = user;
         isok = true;
     } else {
-        while (temp->getNext() != NULL) {
+        while (temp->getNext() != nullptr) {
             temp = temp->getNext();
         }
         temp = user;
@@ -37,19 +37,19 @@ bool UserTable::deleteUser(char *username, char *password) {
     bool isok;
     int home = this->hash(username, password);
     User *temp = users[home];
-    if (temp == NULL) {
+    if (temp == nullptr) {
         isok = false;
     }
-    if (temp->getNext() == NULL) {
-        if (strcmp(temp->getUsername(), username) && strcmp(temp->getPassword(), password)) {
+    if (temp->getNext() == nullptr) {
+        if (strcmp(temp->getUsername(), username) == 0 && strcmp(temp->getPassword(), password) == 0) {
             free(temp);
-            users[home] = NULL;
+            users[home] = nullptr;
             isok = true;
         }
     }
-    while (temp->getNext() != NULL) {
+    while (temp->getNext() != nullptr) {
         User *p = temp->getNext();
-        if (strcmp(temp->getUsername(), username) && strcmp(temp->getPassword(), password)) {
+        if (strcmp(temp->getUsername(), username) == 0 && strcmp(temp->getPassword(), password) == 0) {
             temp = (p->getNext());
             free(p);
             isok = true;
@@ -61,22 +61,22 @@ bool UserTable::deleteUser(char *username, char *password) {
 }
 
 User *UserTable::selectUser(char *username, char *password) {
-    User *user = NULL;
+    User *user = nullptr;
     int home = hash(username, password);
     User *temp = users[home];
-    if (temp == NULL) {
-        user = NULL;
+    if (temp == nullptr) {
+        user = nullptr;
     }
-    if (temp->getNext() == NULL) {
-        if (strcmp(temp->getUsername(), username) && strcmp(temp->getPassword(), password))
+    if (temp->getNext() == nullptr) {
+        if (strcmp(temp->getUsername(), username) == 0 && strcmp(temp->getPassword(), password) == 0)
             user = temp;
     }
-    while (temp->getNext() != NULL) {
+    while (temp->getNext() != nullptr) {
         User *p = temp->getNext();
-        if (strcmp(p->getUsername(), username) && strcmp(p->getPassword(), password)) {
+        if (strcmp(p->getUsername(), username) == 0 && strcmp(p->getPassword(), password) == 0) {
             user = p;
         }
-        temp=p;
+        temp = p;
     }
     return user;
 }

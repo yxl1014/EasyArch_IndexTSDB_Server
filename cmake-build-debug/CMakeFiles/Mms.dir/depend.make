@@ -10,4 +10,5 @@ CMakeFiles/Mms.dir/Tools/tools.cpp.o: ../Tools/tools.h
 CMakeFiles/Mms.dir/main.cpp.o: ../Mms/Mms.h
 CMakeFiles/Mms.dir/main.cpp.o: ../Tools/tools.h
 CMakeFiles/Mms.dir/main.cpp.o: ../main.cpp
+CMakeFiles/Mms.dir/main.cpp.o: ../main.h
 
