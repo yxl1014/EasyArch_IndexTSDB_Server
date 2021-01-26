@@ -21,13 +21,13 @@ bool UserTable::insertUser(User *user) {
     User *temp = users[home];
     bool isok;
     if (temp == nullptr) {
-        temp = user;
+        users[home] = user;
         isok = true;
     } else {
         while (temp->getNext() != nullptr) {
             temp = temp->getNext();
         }
-        temp = user;
+        temp->setNext(user);
         isok = true;
     }
     return isok;
@@ -39,23 +39,23 @@ bool UserTable::deleteUser(char *username, char *password) {
     User *temp = users[home];
     if (temp == nullptr) {
         isok = false;
-    }
-    if (temp->getNext() == nullptr) {
+    } else if (temp->getNext() == nullptr) {
         if (strcmp(temp->getUsername(), username) == 0 && strcmp(temp->getPassword(), password) == 0) {
             free(temp);
             users[home] = nullptr;
             isok = true;
         }
-    }
-    while (temp->getNext() != nullptr) {
-        User *p = temp->getNext();
-        if (strcmp(temp->getUsername(), username) == 0 && strcmp(temp->getPassword(), password) == 0) {
-            temp = (p->getNext());
-            free(p);
-            isok = true;
-            break;
+    } else {
+        while (temp->getNext() != nullptr) {
+            User *p = temp->getNext();
+            if (strcmp(temp->getUsername(), username) == 0 && strcmp(temp->getPassword(), password) == 0) {
+                temp->setNext(p->getNext());
+                free(p);
+                isok = true;
+                break;
+            }
+            temp = temp->getNext();
         }
-        temp = temp->getNext();
     }
     return isok;
 }
@@ -66,17 +66,17 @@ User *UserTable::selectUser(char *username, char *password) {
     User *temp = users[home];
     if (temp == nullptr) {
         user = nullptr;
-    }
-    if (temp->getNext() == nullptr) {
+    } else if (temp->getNext() == nullptr) {
         if (strcmp(temp->getUsername(), username) == 0 && strcmp(temp->getPassword(), password) == 0)
             user = temp;
-    }
-    while (temp->getNext() != nullptr) {
-        User *p = temp->getNext();
-        if (strcmp(p->getUsername(), username) == 0 && strcmp(p->getPassword(), password) == 0) {
-            user = p;
+    } else {
+        while (temp->getNext() != nullptr) {
+            User *p = temp->getNext();
+            if (strcmp(p->getUsername(), username) == 0 && strcmp(p->getPassword(), password) == 0) {
+                user = p;
+            }
+            temp = p;
         }
-        temp = p;
     }
     return user;
 }
@@ -116,8 +116,8 @@ void User::setNext(User *next) {
 User::User() {}
 
 User::User(char *userid, char *username, char *password) {
-    strcpy(this->userid, userid);
-    strcpy(this->username, username);
-    strcpy(this->password, password);
+    this->userid = userid;
+    this->username = username;
+    this->password = password;
 }
 

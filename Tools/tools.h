@@ -14,7 +14,7 @@ private:
     char *userid;
     char *username;
     char *password;
-    User *next = NULL;
+    User *next;
 public:
     char *getUserid() const;
 
