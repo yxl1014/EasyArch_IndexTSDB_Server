@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/ms.dir/main.cpp.o CMakeFiles/ms.dir/ms/getpower.cpp.o  -o ms 
