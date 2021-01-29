@@ -3,21 +3,21 @@
 //
 #include "operationUser.h"
 
-UserTable *users;
+UserTable *users=new UserTable;
 
 char *addUser(char *username, char *password1, char *password2) {
     if (username == nullptr || password1 == nullptr || password2 == nullptr ||
         !strcmp(username, "") || !strcmp(password1, "") || !strcmp(password2, "")) {
         return nullptr;
     }
-    if (strcpy(password1, password2)) {
+    if (strcmp(password1, password2)) {
         return nullptr;
     }
     char *userid = nullptr;
     if (0/*李英凯插入数据*/) {
         return nullptr;
     }
-    userid = nullptr;//=访问李关系型数据库返回一个 userid(select userid from user where username= username and password = password1
+    userid = "1";//=访问李关系型数据库返回一个 userid(select userid from user where username= username and password = password1
     users->insertUser(new User(userid, username, password1));
     return userid;
 }
@@ -47,4 +47,8 @@ int deleteUser(char *username, char *password){
         return false;
     }
     return users->deleteUser(username,password);
+}
+
+void closeall(){
+    delete(users);
 }
