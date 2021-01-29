@@ -4,6 +4,9 @@
 
 #ifndef MMS_MAIN_H
 #define MMS_MAIN_H
+
 #include "Mms/Mms.h"
 #include "Tools/tools.h"
+#include "User/operationUser.h"
+
 #endif //MMS_MAIN_H

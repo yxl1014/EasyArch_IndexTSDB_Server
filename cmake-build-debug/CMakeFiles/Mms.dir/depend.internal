@@ -7,8 +7,13 @@ CMakeFiles/Mms.dir/Mms/do.cpp.o
 CMakeFiles/Mms.dir/Tools/tools.cpp.o
  /home/yxl/CLionProjects/ms/Tools/tools.cpp
  /home/yxl/CLionProjects/ms/Tools/tools.h
+CMakeFiles/Mms.dir/User/operationUser.cpp.o
+ /home/yxl/CLionProjects/ms/Tools/tools.h
+ /home/yxl/CLionProjects/ms/User/operationUser.cpp
+ /home/yxl/CLionProjects/ms/User/operationUser.h
 CMakeFiles/Mms.dir/main.cpp.o
  /home/yxl/CLionProjects/ms/Mms/Mms.h
  /home/yxl/CLionProjects/ms/Tools/tools.h
+ /home/yxl/CLionProjects/ms/User/operationUser.h
  /home/yxl/CLionProjects/ms/main.cpp
  /home/yxl/CLionProjects/ms/main.h

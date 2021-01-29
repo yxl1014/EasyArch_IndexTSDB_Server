@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Mms.dir/Mms/do.cpp.o"
   "CMakeFiles/Mms.dir/Tools/tools.cpp.o"
+  "CMakeFiles/Mms.dir/User/operationUser.cpp.o"
   "CMakeFiles/Mms.dir/main.cpp.o"
   "Mms"
   "Mms.pdb"

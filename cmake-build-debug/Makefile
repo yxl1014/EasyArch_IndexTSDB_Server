@@ -197,6 +197,33 @@ Tools/tools.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Mms.dir/build.make CMakeFiles/Mms.dir/Tools/tools.cpp.s
 .PHONY : Tools/tools.cpp.s
 
+User/operationUser.o: User/operationUser.cpp.o
+
+.PHONY : User/operationUser.o
+
+# target to build an object file
+User/operationUser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Mms.dir/build.make CMakeFiles/Mms.dir/User/operationUser.cpp.o
+.PHONY : User/operationUser.cpp.o
+
+User/operationUser.i: User/operationUser.cpp.i
+
+.PHONY : User/operationUser.i
+
+# target to preprocess a source file
+User/operationUser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Mms.dir/build.make CMakeFiles/Mms.dir/User/operationUser.cpp.i
+.PHONY : User/operationUser.cpp.i
+
+User/operationUser.s: User/operationUser.cpp.s
+
+.PHONY : User/operationUser.s
+
+# target to generate assembly for a file
+User/operationUser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Mms.dir/build.make CMakeFiles/Mms.dir/User/operationUser.cpp.s
+.PHONY : User/operationUser.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -239,6 +266,9 @@ help:
 	@echo "... Tools/tools.o"
 	@echo "... Tools/tools.i"
 	@echo "... Tools/tools.s"
+	@echo "... User/operationUser.o"
+	@echo "... User/operationUser.i"
+	@echo "... User/operationUser.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

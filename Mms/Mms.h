@@ -3,7 +3,10 @@
 //
 #ifndef MMS_MMS_H
 #define MMS_MMS_H
+#include "istream"
+using namespace std;
 
-int getPower(char *tableid);
+int getPower(char *userid, char *tableid,int doing);
+
 
 #endif //MMS_MMS_H

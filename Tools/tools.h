@@ -6,9 +6,9 @@
 
 #include "cstring"
 #include "istream"
-
+#include <mutex>
+#include <list>
 using namespace std;
-
 class User {
 private:
     char *userid;
@@ -35,6 +35,7 @@ public:
     User();
 
     User(char *userid, char *username, char *password);
+    ~User();
 };
 
 class UserTable {
@@ -44,11 +45,16 @@ private:
     int hash(char *username, char *password);
 
 public:
+    mutex user_lock;
+    list<char *> selectAllUsername();
+
     bool insertUser(User *user);
 
     bool deleteUser(char *username, char *password);
 
     User *selectUser(char *username, char *password);
+    UserTable();
+    ~UserTable();
 };
 
 

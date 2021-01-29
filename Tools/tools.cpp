@@ -2,6 +2,7 @@
 // Created by yxl on 2021/1/26.
 //
 
+
 #include "tools.h"
 
 
@@ -17,9 +18,10 @@ int UserTable::hash(char *username, char *password) {
 }
 
 bool UserTable::insertUser(User *user) {
-    int home = this->hash(user->getUsername(), user->getPassword());
-    User *temp = users[home];
     bool isok;
+    int home = this->hash(user->getUsername(), user->getPassword());
+    user_lock.lock();
+    User *temp = users[home];
     if (temp == nullptr) {
         users[home] = user;
         isok = true;
@@ -30,18 +32,20 @@ bool UserTable::insertUser(User *user) {
         temp->setNext(user);
         isok = true;
     }
+    user_lock.unlock();
     return isok;
 }
 
 bool UserTable::deleteUser(char *username, char *password) {
     bool isok;
     int home = this->hash(username, password);
+    user_lock.lock();
     User *temp = users[home];
     if (temp == nullptr) {
         isok = false;
     } else if (temp->getNext() == nullptr) {
         if (strcmp(temp->getUsername(), username) == 0 && strcmp(temp->getPassword(), password) == 0) {
-            free(temp);
+            delete (temp);
             users[home] = nullptr;
             isok = true;
         }
@@ -50,18 +54,20 @@ bool UserTable::deleteUser(char *username, char *password) {
             User *p = temp->getNext();
             if (strcmp(temp->getUsername(), username) == 0 && strcmp(temp->getPassword(), password) == 0) {
                 temp->setNext(p->getNext());
-                free(p);
+                delete (p);
                 isok = true;
                 break;
             }
             temp = temp->getNext();
         }
     }
+    user_lock.unlock();
     return isok;
 }
 
 User *UserTable::selectUser(char *username, char *password) {
     User *user = nullptr;
+    user_lock.lock();
     int home = hash(username, password);
     User *temp = users[home];
     if (temp == nullptr) {
@@ -78,7 +84,50 @@ User *UserTable::selectUser(char *username, char *password) {
             temp = p;
         }
     }
+    user_lock.unlock();
     return user;
+}
+
+UserTable::UserTable() {}
+
+UserTable::~UserTable() {
+    for (int i = 0; i < 100; i++) {
+        User *temp = users[i];
+        User *next;
+        if (temp != nullptr) {
+            if (temp->getNext() != nullptr) {
+                while (temp != nullptr) {
+                    next = temp->getNext();
+                    delete (temp);
+                    temp = next;
+                }
+                users[i] = nullptr;
+            } else {
+                delete (temp);
+                users[i] = nullptr;
+            }
+        }
+    }
+}
+
+list<char *> UserTable::selectAllUsername() {
+    list<char *> list;
+    for (int i = 0; i < 100; i++) {
+        User *temp = users[i];
+        User *next;
+        if (temp != nullptr) {
+            if (temp->getNext() != nullptr) {
+                while (temp != nullptr) {
+                    next = temp->getNext();
+                    list.push_back(temp->getUsername());
+                    temp = next;
+                }
+            } else {
+                list.push_back(temp->getUsername());
+            }
+        }
+    }
+    return list;
 }
 
 char *User::getUserid() const {
@@ -119,5 +168,11 @@ User::User(char *userid, char *username, char *password) {
     this->userid = userid;
     this->username = username;
     this->password = password;
+}
+
+User::~User() {
+    this->userid = nullptr;
+    this->username = nullptr;
+    this->password = nullptr;
 }
 
