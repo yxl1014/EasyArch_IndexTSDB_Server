@@ -8,7 +8,9 @@
 #include "istream"
 #include <mutex>
 #include <list>
+
 using namespace std;
+
 class User {
 private:
     char *userid;
@@ -35,6 +37,7 @@ public:
     User();
 
     User(char *userid, char *username, char *password);
+
     ~User();
 };
 
@@ -46,14 +49,19 @@ private:
 
 public:
     mutex user_lock;
+
     list<char *> selectAllUsername();
 
     bool insertUser(User *user);
 
     bool deleteUser(char *username, char *password);
 
+    bool containsUsername(char *newusername);
+
     User *selectUser(char *username, char *password);
+
     UserTable();
+
     ~UserTable();
 };
 

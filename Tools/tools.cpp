@@ -130,6 +130,33 @@ list<char *> UserTable::selectAllUsername() {
     return list;
 }
 
+bool UserTable::containsUsername(char *newusername) {
+    bool ishave = false;
+    for (int i = 0; i < 100; i++) {
+        User *temp = users[i];
+        User *next;
+        if (temp != nullptr) {
+            if (temp->getNext() != nullptr) {
+                while (temp != nullptr) {
+                    next = temp->getNext();
+                    if (!strcmp(temp->getUsername(), newusername)) {
+                        ishave = true;
+                        i = 100;
+                        break;
+                    }
+                    temp = next;
+                }
+            } else {
+                if (!strcmp(temp->getUsername(), newusername)) {
+                    ishave = true;
+                    break;
+                }
+            }
+        }
+    }
+    return ishave;
+}
+
 char *User::getUserid() const {
     return userid;
 }

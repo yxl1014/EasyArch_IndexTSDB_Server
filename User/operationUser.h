@@ -12,15 +12,22 @@
 using namespace std;
 
 #include "../Tools/tools.h"
+#include "../sqlite/sqlite3.h"
 
 extern UserTable *users;
+
+extern sqlite3 *db;
 
 char *addUser(char *username, char *password1, char *password2);
 
 char *login(char *username, char *password);
 
 list<char *> showUsers();
-void closeall();
+
+void closeUser();
+
 int deleteUser(char *username, char *password);
+
+bool initUser();
 
 #endif //MMS_OPERATIONUSER_H

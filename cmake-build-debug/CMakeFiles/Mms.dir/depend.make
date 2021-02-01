@@ -10,10 +10,12 @@ CMakeFiles/Mms.dir/Tools/tools.cpp.o: ../Tools/tools.h
 CMakeFiles/Mms.dir/User/operationUser.cpp.o: ../Tools/tools.h
 CMakeFiles/Mms.dir/User/operationUser.cpp.o: ../User/operationUser.cpp
 CMakeFiles/Mms.dir/User/operationUser.cpp.o: ../User/operationUser.h
+CMakeFiles/Mms.dir/User/operationUser.cpp.o: ../sqlite/sqlite3.h
 
 CMakeFiles/Mms.dir/main.cpp.o: ../Mms/Mms.h
 CMakeFiles/Mms.dir/main.cpp.o: ../Tools/tools.h
 CMakeFiles/Mms.dir/main.cpp.o: ../User/operationUser.h
 CMakeFiles/Mms.dir/main.cpp.o: ../main.cpp
 CMakeFiles/Mms.dir/main.cpp.o: ../main.h
+CMakeFiles/Mms.dir/main.cpp.o: ../sqlite/sqlite3.h
 
