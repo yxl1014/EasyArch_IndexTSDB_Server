@@ -5,20 +5,20 @@
 
 UserTable *users = nullptr;
 
-extern sqlite3 *db;
+sqlite3 *db;
 
-string insertsql(const string username, const string password) {
+string insertsql(string username, string password) {
     string sql = "insert into users(username,password) values('" + username + "','" + password + "');";
     return sql;
 }
 
-string selectsql(const string username, const string password) {
-    string sql = "select * from users where username=" + username + " and password=" + password + ";";
+string selectsql(string username, string password) {
+    string sql = "select * from users where username='" + username + "' and password='" + password + "';";
     return sql;
 }
 
-string deletesql(const string username, const string password) {
-    string sql = "delete from users where username=" + username + " and password=" + password + ";";
+string deletesql(string username, string password) {
+    string sql = "delete from users where username='" + username + "' and password='" + password + "';";
     return sql;
 }
 
@@ -27,27 +27,34 @@ static int callback(void *data, int args_num, char **argv, char **argc) {
     for (int i = 0; i < args_num; i++) {
         if (!strcmp(argc[i], "userid")) {
             if (argv[i] != nullptr) {
+                cout << argv[i] << endl;
                 user->setUserid(argv[i]);
             }
         }
         if (!strcmp(argc[i], "username")) {
             if (argv[i] != nullptr) {
+                cout << argv[i] << endl;
                 user->setUsername(argv[i]);
             }
         }
         if (!strcmp(argc[i], "password")) {
             if (argv[i] != nullptr) {
+                cout << argv[i] << endl;
                 user->setPassword(argv[i]);
             }
         }
-        users->insertUser(user);
+        if ((i + 1) % 3 == 0) {
+            users->insertUser(user);
+            if (args_num != i + 1)
+                user = new User;
+        }
     }
     return 0;
 }
 
 bool initUser() {
     bool isinit = false;
-    users = new UserTable;
+    users = new UserTable();
     int rc = sqlite3_open("/data/testsql.db", &db);//连接sqlite数据库
     if (rc != SQLITE_OK) {//连接失败则返回初始化失败
         cout << "open sqlite3 fail." << endl;
@@ -92,14 +99,16 @@ char *addUser(char *username, char *password1, char *password2) {
 
     char *userid = nullptr;
     sql = selectsql(username, password1);//拼sql语句
-    rc = sqlite3_exec(db, sql.c_str(), callback, (void *) userid, &error_msg);//若添加成功则查询添加用户的id，并且返回
+    rc = sqlite3_exec(db, sql.c_str(), callback, (void *) users, &error_msg);//若添加成功则查询添加用户的id，并且返回
     if (rc != SQLITE_OK) {
         cout << "Select failed! Error msg: " << error_msg << endl;
         sqlite3_free(error_msg);
         return nullptr;
     }
-
-    userid = users->selectUser(username, password1)->getUserid();//获得加入缓存中的userid，并且返回
+    User *user = users->selectUser(username, password1);
+    if (user != nullptr) {
+        userid = user->getUserid();//获得加入缓存中的userid，并且返回
+    }
     return userid;
 }
 

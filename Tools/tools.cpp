@@ -5,7 +5,6 @@
 
 #include "tools.h"
 
-
 int UserTable::hash(char *username, char *password) {
     int num = 0;
     for (int i = 0; username[i] != '\0'; ++i) {
@@ -21,9 +20,9 @@ bool UserTable::insertUser(User *user) {
     bool isok;
     int home = this->hash(user->getUsername(), user->getPassword());
     user_lock.lock();
-    User *temp = users[home];
+    User *temp = this->users[home];
     if (temp == nullptr) {
-        users[home] = user;
+        this->users[home] = user;
         isok = true;
     } else {
         while (temp->getNext() != nullptr) {
@@ -32,6 +31,7 @@ bool UserTable::insertUser(User *user) {
         temp->setNext(user);
         isok = true;
     }
+    //cout<<users->users[home]->getUsername()<<"\t"<<users->users[home]->getPassword()<<endl;
     user_lock.unlock();
     return isok;
 }
@@ -40,13 +40,13 @@ bool UserTable::deleteUser(char *username, char *password) {
     bool isok;
     int home = this->hash(username, password);
     user_lock.lock();
-    User *temp = users[home];
+    User *temp = this->users[home];
     if (temp == nullptr) {
         isok = false;
     } else if (temp->getNext() == nullptr) {
         if (strcmp(temp->getUsername(), username) == 0 && strcmp(temp->getPassword(), password) == 0) {
             delete (temp);
-            users[home] = nullptr;
+            this->users[home] = nullptr;
             isok = true;
         }
     } else {
@@ -69,11 +69,13 @@ User *UserTable::selectUser(char *username, char *password) {
     User *user = nullptr;
     user_lock.lock();
     int home = hash(username, password);
-    User *temp = users[home];
+    User *temp = this->users[home];
     if (temp == nullptr) {
         user = nullptr;
     } else if (temp->getNext() == nullptr) {
-        if (strcmp(temp->getUsername(), username) == 0 && strcmp(temp->getPassword(), password) == 0)
+        //cout<<users->users[home]->getUsername()<<"\t"<<users->users[home]->getPassword()<<endl;
+        //cout<<temp->getUsername()<<"\t"<<temp->getPassword()<<endl;
+        if ((strcmp(temp->getUsername(), username) == 0) && (strcmp(temp->getPassword(), password) == 0))
             user = temp;
     } else {
         while (temp->getNext() != nullptr) {
@@ -113,7 +115,7 @@ UserTable::~UserTable() {
 list<char *> UserTable::selectAllUsername() {
     list<char *> list;
     for (int i = 0; i < 100; i++) {
-        User *temp = users[i];
+        User *temp = this->users[i];
         User *next;
         if (temp != nullptr) {
             if (temp->getNext() != nullptr) {
@@ -129,11 +131,11 @@ list<char *> UserTable::selectAllUsername() {
     }
     return list;
 }
-
 bool UserTable::containsUsername(char *newusername) {
     bool ishave = false;
     for (int i = 0; i < 100; i++) {
-        User *temp = users[i];
+
+        User *temp = this->users[i];
         User *next;
         if (temp != nullptr) {
             if (temp->getNext() != nullptr) {

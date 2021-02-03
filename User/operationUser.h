@@ -12,9 +12,10 @@
 using namespace std;
 
 #include "../Tools/tools.h"
-#include "../sqlite/sqlite3.h"
+#include "sqlite3.h"
 
 extern UserTable *users;
+//extern UserTable users;
 
 extern sqlite3 *db;
 

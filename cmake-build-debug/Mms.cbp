@@ -82,6 +82,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/yxl/CLionProjects/ms/MTools/MTools.h">
+			<Option target="Mms"/>
+		</Unit>
+		<Unit filename="/home/yxl/CLionProjects/ms/MTools/Mtools.cpp">
+			<Option target="Mms"/>
+		</Unit>
 		<Unit filename="/home/yxl/CLionProjects/ms/Mms/Mms.h">
 			<Option target="Mms"/>
 		</Unit>

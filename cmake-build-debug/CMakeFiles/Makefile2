@@ -94,12 +94,12 @@ clean: CMakeFiles/Mms.dir/clean
 CMakeFiles/Mms.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Mms.dir/build.make CMakeFiles/Mms.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Mms.dir/build.make CMakeFiles/Mms.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yxl/CLionProjects/ms/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5 "Built target Mms"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yxl/CLionProjects/ms/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target Mms"
 .PHONY : CMakeFiles/Mms.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Mms.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/yxl/CLionProjects/ms/cmake-build-debug/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/yxl/CLionProjects/ms/cmake-build-debug/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Mms.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/yxl/CLionProjects/ms/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/Mms.dir/rule

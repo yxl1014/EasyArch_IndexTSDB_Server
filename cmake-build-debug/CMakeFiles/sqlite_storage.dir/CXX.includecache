@@ -7,16 +7,12 @@
 #IncludeRegexTransform: 
 
 /home/yxl/CLionProjects/ms/MTools/MTools.h
-map
--
 iostream
 /home/yxl/CLionProjects/ms/MTools/iostream
 cstring
 /home/yxl/CLionProjects/ms/MTools/cstring
 mutex
 /home/yxl/CLionProjects/ms/MTools/mutex
-sqlite3.h
-/home/yxl/CLionProjects/ms/MTools/sqlite3.h
 
 /home/yxl/CLionProjects/ms/MTools/Mtools.cpp
 MTools.h
@@ -32,15 +28,23 @@ istream
 Mms.h
 /home/yxl/CLionProjects/ms/Mms/Mms.h
 
+/home/yxl/CLionProjects/ms/Tools/tools.cpp
+tools.h
+/home/yxl/CLionProjects/ms/Tools/tools.h
+
 /home/yxl/CLionProjects/ms/Tools/tools.h
 cstring
 /home/yxl/CLionProjects/ms/Tools/cstring
-iostream
-/home/yxl/CLionProjects/ms/Tools/iostream
+istream
+/home/yxl/CLionProjects/ms/Tools/istream
 mutex
 -
 list
 -
+
+/home/yxl/CLionProjects/ms/User/operationUser.cpp
+operationUser.h
+/home/yxl/CLionProjects/ms/User/operationUser.h
 
 /home/yxl/CLionProjects/ms/User/operationUser.h
 iostream
@@ -51,8 +55,8 @@ list
 -
 ../Tools/tools.h
 /home/yxl/CLionProjects/ms/Tools/tools.h
-sqlite3.h
-/home/yxl/CLionProjects/ms/User/sqlite3.h
+../sqlite/sqlite3.h
+/home/yxl/CLionProjects/ms/sqlite/sqlite3.h
 
 /home/yxl/CLionProjects/ms/main.cpp
 iostream
@@ -67,4 +71,8 @@ Tools/tools.h
 /home/yxl/CLionProjects/ms/Tools/tools.h
 User/operationUser.h
 /home/yxl/CLionProjects/ms/User/operationUser.h
+
+/home/yxl/CLionProjects/ms/sqlite/sqlite3.h
+stdarg.h
+-
 

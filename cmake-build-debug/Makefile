@@ -143,6 +143,33 @@ Mms/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Mms.dir/build.make CMakeFiles/Mms.dir/build
 .PHONY : Mms/fast
 
+MTools/Mtools.o: MTools/Mtools.cpp.o
+
+.PHONY : MTools/Mtools.o
+
+# target to build an object file
+MTools/Mtools.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Mms.dir/build.make CMakeFiles/Mms.dir/MTools/Mtools.cpp.o
+.PHONY : MTools/Mtools.cpp.o
+
+MTools/Mtools.i: MTools/Mtools.cpp.i
+
+.PHONY : MTools/Mtools.i
+
+# target to preprocess a source file
+MTools/Mtools.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Mms.dir/build.make CMakeFiles/Mms.dir/MTools/Mtools.cpp.i
+.PHONY : MTools/Mtools.cpp.i
+
+MTools/Mtools.s: MTools/Mtools.cpp.s
+
+.PHONY : MTools/Mtools.s
+
+# target to generate assembly for a file
+MTools/Mtools.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Mms.dir/build.make CMakeFiles/Mms.dir/MTools/Mtools.cpp.s
+.PHONY : MTools/Mtools.cpp.s
+
 Mms/do.o: Mms/do.cpp.o
 
 .PHONY : Mms/do.o
@@ -260,6 +287,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Mms"
+	@echo "... MTools/Mtools.o"
+	@echo "... MTools/Mtools.i"
+	@echo "... MTools/Mtools.s"
 	@echo "... Mms/do.o"
 	@echo "... Mms/do.i"
 	@echo "... Mms/do.s"

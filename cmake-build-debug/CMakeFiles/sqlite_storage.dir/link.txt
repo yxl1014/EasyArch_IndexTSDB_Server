@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/sqlite_storage.dir/main.cpp.o CMakeFiles/sqlite_storage.dir/Mms/do.cpp.o CMakeFiles/sqlite_storage.dir/Tools/tools.cpp.o CMakeFiles/sqlite_storage.dir/User/operationUser.cpp.o CMakeFiles/sqlite_storage.dir/MTools/Mtools.cpp.o  -o sqlite_storage  -lsqlite3 -lsqlite3 

@@ -5,7 +5,7 @@
 #define MMS_TOOLS_H
 
 #include "cstring"
-#include "istream"
+#include "iostream"
 #include <mutex>
 #include <list>
 
@@ -18,11 +18,8 @@ private:
     char *password;
     User *next;
 public:
+
     char *getUserid() const;
-
-    User *getNext() const;
-
-    void setNext(User *next);
 
     void setUserid(char *userid);
 
@@ -34,6 +31,10 @@ public:
 
     void setPassword(char *password);
 
+    User *getNext() const;
+
+    void setNext(User *next);
+
     User();
 
     User(char *userid, char *username, char *password);
@@ -43,11 +44,10 @@ public:
 
 class UserTable {
 private:
-    User *users[100];
-
     int hash(char *username, char *password);
 
 public:
+    User *users[100];
     mutex user_lock;
 
     list<char *> selectAllUsername();
@@ -64,6 +64,5 @@ public:
 
     ~UserTable();
 };
-
 
 #endif //MMS_TOOLS_H
