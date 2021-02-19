@@ -6,17 +6,23 @@
 
 #IncludeRegexTransform: 
 
-/home/yxl/CLionProjects/ms/Tools/tools.cpp
-tools.h
-/home/yxl/CLionProjects/ms/Tools/tools.h
-
-/home/yxl/CLionProjects/ms/Tools/tools.h
-cstring
-/home/yxl/CLionProjects/ms/Tools/cstring
-iostream
-/home/yxl/CLionProjects/ms/Tools/iostream
-mutex
+/home/yxl/CLionProjects/ms/MTools/MTools.h
+map
 -
+iostream
+/home/yxl/CLionProjects/ms/MTools/iostream
 list
 -
+mutex
+-
+cstring
+/home/yxl/CLionProjects/ms/MTools/cstring
+mutex
+/home/yxl/CLionProjects/ms/MTools/mutex
+sqlite3.h
+/home/yxl/CLionProjects/ms/MTools/sqlite3.h
+
+/home/yxl/CLionProjects/ms/MTools/Mtools.cpp
+MTools.h
+/home/yxl/CLionProjects/ms/MTools/MTools.h
 

@@ -24,7 +24,7 @@ extern sqlite3 *pdb;
 
 extern map<string,string>::iterator pit;
 
-extern mutex *lock;
+extern mutex power_lock;
 
 bool initMms();
 
