@@ -88,12 +88,6 @@
 		<Unit filename="/home/yxl/CLionProjects/ms/MTools/Mtools.cpp">
 			<Option target="Mms"/>
 		</Unit>
-		<Unit filename="/home/yxl/CLionProjects/ms/Mms/Mms.h">
-			<Option target="Mms"/>
-		</Unit>
-		<Unit filename="/home/yxl/CLionProjects/ms/Mms/do.cpp">
-			<Option target="Mms"/>
-		</Unit>
 		<Unit filename="/home/yxl/CLionProjects/ms/Tools/tools.cpp">
 			<Option target="Mms"/>
 		</Unit>

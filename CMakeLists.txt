@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 
 link_libraries(sqlite3)
-add_executable(Mms main.cpp Mms/do.cpp Mms/Mms.h
+add_executable(Mms main.cpp
         Tools/tools.h Tools/tools.cpp main.h
         User/operationUser.cpp User/operationUser.h
         MTools/Mtools.cpp MTools/MTools.h

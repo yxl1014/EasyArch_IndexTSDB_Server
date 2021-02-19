@@ -14,7 +14,7 @@ using namespace std;
 #include "../Tools/tools.h"
 #include "sqlite3.h"
 
-extern UserTable *users;
+//extern UserTable *users;
 //extern UserTable users;
 
 extern sqlite3 *db;
@@ -25,9 +25,9 @@ char *login(char *username, char *password);
 
 list<char *> showUsers();
 
-void closeUser();
-
 int deleteUser(char *username, char *password);
+
+void closeUser();
 
 bool initUser();
 

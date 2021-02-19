@@ -170,33 +170,6 @@ MTools/Mtools.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Mms.dir/build.make CMakeFiles/Mms.dir/MTools/Mtools.cpp.s
 .PHONY : MTools/Mtools.cpp.s
 
-Mms/do.o: Mms/do.cpp.o
-
-.PHONY : Mms/do.o
-
-# target to build an object file
-Mms/do.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Mms.dir/build.make CMakeFiles/Mms.dir/Mms/do.cpp.o
-.PHONY : Mms/do.cpp.o
-
-Mms/do.i: Mms/do.cpp.i
-
-.PHONY : Mms/do.i
-
-# target to preprocess a source file
-Mms/do.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Mms.dir/build.make CMakeFiles/Mms.dir/Mms/do.cpp.i
-.PHONY : Mms/do.cpp.i
-
-Mms/do.s: Mms/do.cpp.s
-
-.PHONY : Mms/do.s
-
-# target to generate assembly for a file
-Mms/do.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Mms.dir/build.make CMakeFiles/Mms.dir/Mms/do.cpp.s
-.PHONY : Mms/do.cpp.s
-
 Tools/tools.o: Tools/tools.cpp.o
 
 .PHONY : Tools/tools.o
@@ -290,9 +263,6 @@ help:
 	@echo "... MTools/Mtools.o"
 	@echo "... MTools/Mtools.i"
 	@echo "... MTools/Mtools.s"
-	@echo "... Mms/do.o"
-	@echo "... Mms/do.i"
-	@echo "... Mms/do.s"
 	@echo "... Tools/tools.o"
 	@echo "... Tools/tools.i"
 	@echo "... Tools/tools.s"

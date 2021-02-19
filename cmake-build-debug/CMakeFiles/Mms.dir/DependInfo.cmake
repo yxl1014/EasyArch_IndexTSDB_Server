@@ -5,7 +5,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/yxl/CLionProjects/ms/MTools/Mtools.cpp" "/home/yxl/CLionProjects/ms/cmake-build-debug/CMakeFiles/Mms.dir/MTools/Mtools.cpp.o"
-  "/home/yxl/CLionProjects/ms/Mms/do.cpp" "/home/yxl/CLionProjects/ms/cmake-build-debug/CMakeFiles/Mms.dir/Mms/do.cpp.o"
   "/home/yxl/CLionProjects/ms/Tools/tools.cpp" "/home/yxl/CLionProjects/ms/cmake-build-debug/CMakeFiles/Mms.dir/Tools/tools.cpp.o"
   "/home/yxl/CLionProjects/ms/User/operationUser.cpp" "/home/yxl/CLionProjects/ms/cmake-build-debug/CMakeFiles/Mms.dir/User/operationUser.cpp.o"
   "/home/yxl/CLionProjects/ms/main.cpp" "/home/yxl/CLionProjects/ms/cmake-build-debug/CMakeFiles/Mms.dir/main.cpp.o"

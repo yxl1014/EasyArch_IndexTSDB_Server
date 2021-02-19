@@ -131,6 +131,7 @@ list<char *> UserTable::selectAllUsername() {
     }
     return list;
 }
+
 bool UserTable::containsUsername(char *newusername) {
     bool ishave = false;
     for (int i = 0; i < 100; i++) {
@@ -164,7 +165,9 @@ char *User::getUserid() const {
 }
 
 void User::setUserid(char *userid) {
-    User::userid = userid;
+    this->userid = (char *) malloc(100);
+    memset(this->userid,0,100);
+    strcpy(this->userid, userid);
 }
 
 char *User::getUsername() const {
@@ -172,7 +175,9 @@ char *User::getUsername() const {
 }
 
 void User::setUsername(char *username) {
-    User::username = username;
+    this->username = (char *) malloc(100);
+    memset(this->username,0,100);
+    strcpy(this->username, username);
 }
 
 char *User::getPassword() const {
@@ -180,7 +185,9 @@ char *User::getPassword() const {
 }
 
 void User::setPassword(char *password) {
-    User::password = password;
+    this->password = (char *) malloc(100);
+    memset(this->password,0,100);
+    strcpy(this->password, password);
 }
 
 User *User::getNext() const {

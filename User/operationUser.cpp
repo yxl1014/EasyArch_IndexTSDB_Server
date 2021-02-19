@@ -2,8 +2,9 @@
 // Created by yxl on 2021/1/29.
 //
 #include "operationUser.h"
-
-UserTable *users = nullptr;
+//0x5591cfcd2eb0
+//0x5591cfcd2eb0
+extern UserTable *users = nullptr;
 
 sqlite3 *db;
 
