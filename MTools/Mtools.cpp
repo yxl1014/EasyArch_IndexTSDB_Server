@@ -36,7 +36,8 @@ bool getdbnames() {
 
 //callback函数为数据库返回值回调函数
 //argc为字段名，若字段为userid，username，password，一共两条数据，则argc为userid，username，password，userid，username，password数组
-static int callback(void *data, int args_num, char **argv, char **argc) {//argv为数据若第一行数据为1 2 3 ，第二行数据为4 5 6,则argv为1 2 3 4 5 6数组
+static int
+callback(void *data, int args_num, char **argv, char **argc) {//argv为数据若第一行数据为1 2 3 ，第二行数据为4 5 6,则argv为1 2 3 4 5 6数组
     string key;//查询到的key
     string value;//查询到的value
     if (args_num == 0) {//args_num为查询的数据量，如：若有3个字段查询到有3条数据，则共3*3=9个数据，args_num=9
@@ -79,9 +80,9 @@ bool closeMms() {
 }
 
 string setPower(string userid, string mask) {
-    string power="";
-    if(0==mask.find(userid)){//判断掩码正确性
-        power=mask;
+    string power = "";
+    if (0 == mask.find(userid)) {//判断掩码正确性
+        power = mask;
     }
     return power;//若不正确返回空
 }
@@ -105,7 +106,7 @@ bool givePower(string userid, string tableid, string mask) {//给权限
 
     string value = setPower(userid, mask);//设置权限
 
-    if(value.compare("")||value.empty()){//判断权限掩码设置是否正确
+    if (value.compare("") || value.empty()) {//判断权限掩码设置是否正确
         return false;
     }
 
@@ -136,7 +137,7 @@ bool updatePower(string userid, string tableid, string mask) {
     string key = userid + tableid;//缓存key为id
     string value = setPower(userid, mask);//设置权限
 
-    if(value.compare("")||value.empty()){//判断权限掩码设置是否正确
+    if (value.compare("") || value.empty()) {//判断权限掩码设置是否正确
         return false;
     }
 
@@ -159,7 +160,7 @@ bool updatePower(string userid, string tableid, string mask) {
     return true;
 }
 
-int getPower(string userid, string tableid) {
+int getPower(string userid, string tableid) {//获取权限掩码
     if (userid.empty() || userid.compare("")//判断是否为空
         || tableid.empty() || tableid.compare("")) {
         return 0;
@@ -216,4 +217,32 @@ bool deletePower(string userid, string tableid) {
     //power_lock.unlock();
 
     return true;
+}
+
+list<bool> containsMask(string userid, string mask) {//获取权限
+
+    list<bool> doing;//定义一个返回链表
+
+    if (userid.empty() || userid.compare("") ||//判断不为空
+        mask.empty() || mask.compare("")) {
+        return doing;//为空直接返回
+    }
+
+    if (0 != mask.find(userid)) {//判断掩码正确性
+        return doing;//不正确直接返回
+    }
+    int useridsize = userid.length();//获取用户id长度
+    int masksize = mask.length();//获取掩码长度
+    string dos = mask.substr(useridsize, masksize - useridsize);//截取除用户id的掩码
+
+    int dossize = dos.length();//获取除id的掩码长度
+
+    for (int i = 0; i < dossize; i++) {//一次判断掩码1或0，1为true，0为false，第一位为是否可以写，其它依次为每个字段是否可读
+        if (dos[i] == '0')
+            doing.push_back(false);//用尾插法往链表插入数据
+        else
+            doing.push_back(true);
+    }
+
+    return doing;
 }
