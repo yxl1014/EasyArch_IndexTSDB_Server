@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-    /*closeUser();
+    closeUser();
     initUser();
     cout << addUser((char *)"abc", (char *)"123", (char *)"123") << endl;
     cout << addUser((char *)"cba", (char *)"321", (char *)"321") << endl;
@@ -16,8 +16,6 @@ int main() {
     cout << endl;
     deleteUser((char *)"bcd", (char *)"456");
     cout << "bcd:" << login((char *)"bcd", (char *)"456") << endl;
-    closeUser();*/
-    string s="127";
-    cout<<atoi(s.c_str())<<endl;
+    closeUser();
     return 0;
 }

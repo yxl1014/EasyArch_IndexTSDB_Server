@@ -12,7 +12,7 @@ list<string> dbnames;
 
 sqlite3 *pdb;
 
-mutex power_lock;
+//mutex power_lock;
 
 string insertpowersql(string usertableid, string powermask) {//拼插入语句
     string sql = "insert into powers(usertableid,powermask) values('" + usertableid + "','" + powermask + "');";
@@ -24,38 +24,40 @@ string updatepowersql(string usertableid, string newpowermask) {//拼更新语�
     return sql;
 }
 
-string deletesql(string usertableid) {
+string deletesql(string usertableid) {//拼删除语句
     string sql = "delete from powers where usertableid='" + usertableid + "';";
     return sql;
 }
 
 bool getdbnames() {
     bool ok = false;
-
     return ok;
 }
 
-static int callback(void *data, int args_num, char **argv, char **argc) {
-    string key;
-    string value;
-    if (args_num == 0) {
-        return 0;
+//callback函数为数据库返回值回调函数
+//argc为字段名，若字段为userid，username，password，一共两条数据，则argc为userid，username，password，userid，username，password数组
+static int callback(void *data, int args_num, char **argv, char **argc) {//argv为数据若第一行数据为1 2 3 ，第二行数据为4 5 6,则argv为1 2 3 4 5 6数组
+    string key;//查询到的key
+    string value;//查询到的value
+    if (args_num == 0) {//args_num为查询的数据量，如：若有3个字段查询到有3条数据，则共3*3=9个数据，args_num=9
+        return 0;//若没有数据则直接返回
     }
-    for (int i = 0; i < args_num; i++) {
-        if (!strcmp(argc[i], "usertableid")) {
-            if (argv[i] != nullptr) {
-                key = argv[i];
+    for (int i = 0; i < args_num; i++) {//循环遍历数据
+        if (!strcmp(argc[i], "usertableid")) {//若字段名为usertableid
+            if (argv[i] != nullptr) {//且数据不为null
+                key = argv[i];//则key等于该数据
             }
         }
-        if (!strcmp(argc[i], "powermask")) {
+        if (!strcmp(argc[i], "powermask")) {//同上
             if (argv[i] != nullptr) {
                 value = argv[i];
             }
         }
-        if ((i + 1) % 2 == 0) {
-            power_lock.lock();
+        if ((i + 1) % 2 == 0) {//若多条数据，则两次往本地缓存存储一次
+            //TODO:锁
+            //power_lock.lock();
             powers[key] = value;
-            power_lock.unlock();
+            //power_lock.unlock();
         }
     }
     return 0;
@@ -71,33 +73,41 @@ bool initMms() {
 }
 
 bool closeMms() {
-    powers.clear();
-    sqlite3_close(pdb);
+    powers.clear();//清空本地缓存
+    sqlite3_close(pdb);//关闭数据库连接
     return true;
 }
 
-string setPower(string userid, string tableid) {
-    string power;
-    //TODO:关键点,暂时没有思路
-    return power;
+string setPower(string userid, string mask) {
+    string power="";
+    if(0==mask.find(userid)){//判断掩码正确性
+        power=mask;
+    }
+    return power;//若不正确返回空
 }
 
-bool givePower(string userid, string tableid) {
+bool givePower(string userid, string tableid, string mask) {//给权限
     if (userid.empty() || userid.compare("")//判断是否为空
-        || tableid.empty() || tableid.compare("")) {
+        || tableid.empty() || tableid.compare("")
+        || mask.empty() || mask.compare("")) {
         return false;
     }
     string key = userid + tableid;//缓存key为id
-    power_lock.lock();
+    //TODO：锁
+    //power_lock.lock();
     if (powers.count(key)) {//查看这个权限本地有没有
-        if (updatePower(userid, tableid))//如果有则变为修改权限
+        if (updatePower(userid, tableid, mask))//如果有则变为修改权限
             return true;
         else
             return false;
     }
-    power_lock.unlock();
+    //power_lock.unlock();
 
-    string value = setPower(userid,tableid);//设置权限
+    string value = setPower(userid, mask);//设置权限
+
+    if(value.compare("")||value.empty()){//判断权限掩码设置是否正确
+        return false;
+    }
 
     char *error_msg = nullptr;//sqlite报错提示
 
@@ -110,19 +120,25 @@ bool givePower(string userid, string tableid) {
         sqlite3_free(error_msg);
         return false;
     }
-    power_lock.lock();
+    //TODO:锁
+    //power_lock.lock();
     powers[key] = value;//存入本地
-    power_lock.unlock();
+    //power_lock.unlock();
     return true;
 }
 
-bool updatePower(string userid, string tableid) {
+bool updatePower(string userid, string tableid, string mask) {
     if (userid.empty() || userid.compare("")//判断是否为空
-        || tableid.empty() || tableid.compare("")) {
+        || tableid.empty() || tableid.compare("")
+        || mask.empty() || mask.compare("")) {
         return false;
     }
     string key = userid + tableid;//缓存key为id
-    string value = setPower(userid,tableid);//设置权限
+    string value = setPower(userid, mask);//设置权限
+
+    if(value.compare("")||value.empty()){//判断权限掩码设置是否正确
+        return false;
+    }
 
     char *error = nullptr;
 
@@ -135,10 +151,10 @@ bool updatePower(string userid, string tableid) {
         sqlite3_free(error);
         return false;
     }
-
-    power_lock.lock();
+    //TODO：锁
+    //power_lock.lock();
     powers[key] = value;//存入本地
-    power_lock.unlock();
+    //power_lock.unlock();
 
     return true;
 }
@@ -150,7 +166,8 @@ int getPower(string userid, string tableid) {
     }
     string key = userid + tableid;//缓存key为id
 
-    power_lock.lock();//上锁
+    //TODO:锁
+    //power_lock.lock();//上锁
 
     if (powers.count(key)) {//判断缓存中有没有
         return atoi(powers[key].c_str());
@@ -167,21 +184,21 @@ int getPower(string userid, string tableid) {
     }
 
     if (powers.count(key)) {
-        return atoi(powers[key].c_str());
+        return atoi(powers[key].c_str());//返回int类型的掩码
     }
 
-    power_lock.unlock();
+    //power_lock.unlock();
     return 0;
 }
 
 bool deletePower(string userid, string tableid) {
     if (userid.empty() || userid.compare("")//判断是否为空
         || tableid.empty() || tableid.compare("")) {
-        return 0;
+        return false;
     }
     string key = userid + tableid;//缓存key为id
-
-    power_lock.lock();//上锁
+    //TODO：锁
+    //power_lock.lock();//上锁
 
     if (powers.count(key)) {//判断缓存中有没有
         powers.erase(key);
@@ -196,7 +213,7 @@ bool deletePower(string userid, string tableid) {
         sqlite3_free(zErrMsg);
         return false;
     }
-    power_lock.unlock();
+    //power_lock.unlock();
 
     return true;
 }

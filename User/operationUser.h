@@ -17,18 +17,18 @@ using namespace std;
 //extern UserTable *users;
 //extern UserTable users;
 
-extern sqlite3 *db;
+extern sqlite3 *db;//连接数据库
 
-char *addUser(char *username, char *password1, char *password2);
+char *addUser(char *username, char *password1, char *password2);//添加用户
 
-char *login(char *username, char *password);
+char *login(char *username, char *password);//登录
 
-list<char *> showUsers();
+list<char *> showUsers();//遍历用户名
 
-int deleteUser(char *username, char *password);
+int deleteUser(char *username, char *password);//删除用户
 
-void closeUser();
+void closeUser();//关闭用户缓存
 
-bool initUser();
+bool initUser();//初始化用户缓存
 
 #endif //MMS_OPERATIONUSER_H

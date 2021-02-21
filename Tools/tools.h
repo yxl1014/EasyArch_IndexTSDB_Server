@@ -13,10 +13,10 @@ using namespace std;
 
 class User {
 private:
-    char *userid;
-    char *username;
-    char *password;
-    User *next;
+    char *userid;//用户id
+    char *username;//用户名
+    char *password;//用户密码
+    User *next;//链表指针
 public:
 
     char *getUserid() const;
@@ -44,21 +44,21 @@ public:
 
 class UserTable {
 private:
-    int hash(char *username, char *password);
+    int hash(char *username, char *password);//计算hash值
 
 public:
     User *users[100];
-    mutex user_lock;
+    //mutex user_lock;
 
-    list<char *> selectAllUsername();
+    list<char *> selectAllUsername();//遍历所有用户名
 
-    bool insertUser(User *user);
+    bool insertUser(User *user);//插入用户
 
-    bool deleteUser(char *username, char *password);
+    bool deleteUser(char *username, char *password);//删除用户
 
-    bool containsUsername(char *newusername);
+    bool containsUsername(char *newusername);//判断重名
 
-    User *selectUser(char *username, char *password);
+    User *selectUser(char *username, char *password);//查询用户
 
     UserTable();
 
