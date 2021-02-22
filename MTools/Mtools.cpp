@@ -160,7 +160,7 @@ bool updatePower(string userid, string tableid, string mask) {
     return true;
 }
 
-int getPower(string userid, string tableid) {//获取权限掩码
+string getPower(string userid, string tableid) {//获取权限掩码
     if (userid.empty() || userid.compare("")//判断是否为空
         || tableid.empty() || tableid.compare("")) {
         return 0;
@@ -171,7 +171,7 @@ int getPower(string userid, string tableid) {//获取权限掩码
     //power_lock.lock();//上锁
 
     if (powers.count(key)) {//判断缓存中有没有
-        return atoi(powers[key].c_str());
+        return powers[key];
     }
 
     char *zErrMsg = nullptr;//接受exec函数返回的信息
@@ -181,15 +181,15 @@ int getPower(string userid, string tableid) {//获取权限掩码
     if (ok != 0) {//查询未成功，则报错并退出。
         cout << "failed select:" << zErrMsg << endl;
         sqlite3_close(pdb);
-        return 0;
+        return "";
     }
 
     if (powers.count(key)) {
-        return atoi(powers[key].c_str());//返回int类型的掩码
+        return powers[key];//返回掩码
     }
 
     //power_lock.unlock();
-    return 0;
+    return "";
 }
 
 bool deletePower(string userid, string tableid) {

@@ -34,7 +34,7 @@ bool givePower(string userid, string tableid, string mask);//赋予权限
 
 bool updatePower(string userid, string tableid, string mask);//更新权限
 
-int getPower(string userid, string tableid);//获取权限掩码
+string getPower(string userid, string tableid);//获取权限掩码
 
 list<bool> containsMask(string userid,string mask);//获取权限
 
